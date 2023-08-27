@@ -11,8 +11,15 @@ function login(){
     id: id.value,
     psword: psword.value
    };
-   console.log(req);
-   // console.log(id.value);
+   fetch("/login",{
+    method:"POST",
+    headers:{
+        "Content-Type":"application/json", //데이터 형식이 제이쓴형식이라는것을 알려줌
+    } //두번째 파라미터로 전달할 데이터를 보내줄 수 있음.오브젝트의 형태로 보내줘야함
+    body: JSON.stringify(req), //제이슨 데이터 타입을 이용해 데이터를 전달할거니까 제이쓴 형태로 감싸줘야함
+    }); //fetch가 있어야 html에 들어온 데이터를 서버로 전달해줄수 있음
 }
+
+
 
    
