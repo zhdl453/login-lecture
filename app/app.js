@@ -9,7 +9,7 @@ const home = require('./src/routes/home');
 //app setting
 app.set("views", "./src/views");
 app.set("view engine", "ejs");
-app.use(express.static(`${__dirname}/src/public`)) //정적경로로 이제 여기 /public를 기본으로 깔아주는거임
+app.use(express.static(`${__dirname}/src/public`)); //정적경로로 이제 여기 /public를 기본으로 깔아주는거임
 //원래 app,get('/',(req,res)=>{} 이런식인데 router 폴더에다가 따로 파일 저장해서 불러올거니까
 //const router = express.Router(); 해주고
 //app.get()을 -> router.get()로만 바꿔주면 되는데, 이렇게 하면 여기 index.js파일에서만 쓸수 있다.
