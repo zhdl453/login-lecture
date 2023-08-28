@@ -1,5 +1,5 @@
 "use strict";
-
+console.log("bye");
 const id = document.querySelector("#id"), //#:태그에 id로 되어있는걸 가지고 왔다라는뜻
     psword = document.querySelector("#psword"),
     loginBtn = document.querySelector("button");
@@ -7,10 +7,12 @@ const id = document.querySelector("#id"), //#:태그에 id로 되어있는걸 �
 loginBtn.addEventListener("click", login);
 
 function login(){
+    console.log("byeeee");
    const req = {
     id: id.value,
     psword: psword.value
    };
+   
    fetch("/login",{
     method:"POST",
     headers:{
@@ -19,7 +21,16 @@ function login(){
     body: JSON.stringify(req), //제이슨 데이터 타입을 이용해 데이터를 전달할거니까 제이쓴 형태로 감싸줘야함
     })
     .then((res)=>res.json())
-    .then((res) => console.log(res)); //fetch가 있어야 html에 들어온 데이터를 서버로 전달해줄수 있음
+    .then((res) => {
+        if (res.success){
+            location.href = "/";
+        } else {
+            alert(res.msg);
+        }
+    })
+    .catch((error) =>{
+        console.error(new Error("erro occurs during login"));
+    }); //fetch가 있어야 html에 들어온 데이터를 서버로 전달해줄수 있음
 }
 
 
