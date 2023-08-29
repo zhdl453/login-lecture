@@ -1,18 +1,22 @@
 "use strict";
 
-const id = document.querySelector("#id"), //#:태그에 id로 되어있는걸 가지고 왔다라는뜻
+const id = document.querySelector("#id"),
+  name = document.querySelector("#name"), //#:태그에 id로 되어있는걸 가지고 왔다라는뜻
   psword = document.querySelector("#psword"),
-  loginBtn = document.querySelector("#button");
+  confirmPsword = document.querySelector("#confirm-psword"),
+  registerBtn = document.querySelector("#button");
+console.log("hello register");
+registerBtn.addEventListener("click", register);
 
-loginBtn.addEventListener("click", login);
-
-function login() {
+function register() {
   const req = {
     id: id.value,
+    name: name.value,
     psword: psword.value,
+    confirmPsword: confirmPsword.value,
   };
 
-  fetch("/login",{ 
+  fetch("/register",{ 
     method: "POST",
     headers: {
       "Content-Type": "application/json", //데이터 형식이 제이쓴형식이라는것을 알려줌
@@ -22,14 +26,12 @@ function login() {
   .then((res) => res.json())
   .then((res) => {
     if (res.success) {
-      console.log("hello");
-      location.href = "/";
+      location.href = "/login";
     }else {
-      console.log("helloooo");
       alert(res.msg);
     }
   })
   .catch((error) => {
-    console.error(new Error("로그인 중 오류 발생"));
+    console.error(new Error("회원가입 중 오류발생"));
   }); //fetch가 있어야 html에 들어온 데이터를 서버로 전달해줄수 있음
 }
