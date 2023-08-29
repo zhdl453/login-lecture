@@ -7,17 +7,22 @@ class User{
     } 
 
     login(){
-        const body = this.body;
-        const {id, psword} = UserStorage.getUserInfo(body.id); //getUsers(id,psword): id랑 psword라는 필드값을 가져오겠다는뜻
+        const client = this.body;
+        const {id, psword} = UserStorage.getUserInfo(client.id); //getUsers(id,psword): id랑 psword라는 필드값을 가져오겠다는뜻
          //id,psword만 받아왔음. 이름도 받고싶으면 {id, psword, name}이라고 하면됨.
          if(id){
-            if(id === body.id && psword === body.psword){
+            if(id === client.id && psword === client.psword){
                 return {success:true};//=> UserStorage에 있는 id,pw가 유저가 쓴 id,pw가 같다면
              }
              return {success:false, msg:"비밀번호가 틀렸습니다."};
          }
          return {success:false, msg:"존재하지 않는 아이디입니다."};  
     }// 변수로 받을 수 있지만, 나는 오브젝트로 그냥 바로 id,psword변수에 받아버리기 위해서 const {id,psword}해줌
+
+    register(){
+        const client = this.body;
+        UserStorage.save(client); //constructor(body)에서 받은 유저의 바디가 UserStorage에 저장되는거임
+    }
 }
 module.exports = User; //밖에서 사용할수 있도록 export해줌
 

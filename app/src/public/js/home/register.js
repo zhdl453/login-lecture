@@ -9,6 +9,9 @@ console.log("hello register");
 registerBtn.addEventListener("click", register);
 
 function register() {
+  if(psword !== confirmPsword.value){
+    return alert("password is not matched")
+  }
   const req = {
     id: id.value,
     name: name.value,
