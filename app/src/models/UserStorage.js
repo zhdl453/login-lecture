@@ -20,9 +20,21 @@ class UserStorage { //users를 static으로 전역변수로 만들어주면 클�
         if(users.hasOwnProperty(field)){
             newUsers[field] = users[field];
         }
-        return uewUsers;
+        return newUsers;
     }, {});
     return newUsers;
+    }
+
+    static getUserInfo(id) { //
+        const user = this.#users;
+        const idx = users.id.indexOf(id); //파라미터로 담아준 id가 여기 담아지고, 그 id의 순차가 idx에 담아짐
+        const usersKeys = object.keys(users); //=> [id,psword,name] 이러한 배열이 만들어지고, 
+        const userInfo = usersKeys.reduce((newUser,info)=>{ //순차적으로 들어가게됨
+            newUser[info] = users[info][idx]; //newUser라는 오브젝트에 키값 info
+            return newUser;
+            }, {});
+
+            return userInfo; //userInfo에 ["id001","pw001","KIM"], ["id002","pw002","LEE"] 이런식으로 들어감
     }
 }
 

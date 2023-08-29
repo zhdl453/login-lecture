@@ -7,7 +7,7 @@ const app = express();
 //routing
 const home = require('./src/routes/home');
 //app setting
-app.set("views", "./src/views/home");
+app.set("views", "./src/views");
 app.set("view engine", "ejs");
 app.use(express.static(`${__dirname}/src/public`)); //정적경로로 이제 여기 /public를 기본으로 깔아주는거임
 app.use(bodyParser.json());//제이슨파일을 파싱할수 있도록 명시해줌 //미들웨어
