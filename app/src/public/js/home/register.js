@@ -3,15 +3,15 @@
 const id = document.querySelector("#id"),
   name = document.querySelector("#name"), //#:태그에 id로 되어있는걸 가지고 왔다라는뜻
   psword = document.querySelector("#psword"),
-  confirmPsword = document.querySelector("#confirm-psword"),
+  confirmPsword = document.querySelector("#confirmPsword"),
   registerBtn = document.querySelector("#button");
 console.log("hello register");
 registerBtn.addEventListener("click", register);
 
 function register() {
-  if(psword !== confirmPsword.value){
-    return alert("password is not matched")
-  }
+  if(!id.value) return alert("아이디를 입력해주세요.");
+  if(psword.value !== confirmPsword.value) return alert("비밀번호가 일치하지 않습니다.");
+  
   const req = {
     id: id.value,
     name: name.value,
@@ -31,6 +31,7 @@ function register() {
     if (res.success) {
       location.href = "/login";
     }else {
+      console.log(".then(!success)하면 찍히게");
       alert(res.msg);
     }
   })
