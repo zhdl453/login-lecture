@@ -21,9 +21,9 @@ const output = {
 };
 
 const process = {
-    login: (req,res)=>{
+    login:  async (req,res)=>{ //async는 항상 함수 앞에 놔줌.
         const user = new User(req.body); // User.js에서 유저의 body에 생성자 바디값 넣어줬으니, 이제 여기서 이 유저를 유저라는 인스턴스로 만들 수가 있게 됨.
-        const response = user.login();
+        const response = await user.login(); // User.js에 있는 login()함수 실행도 오래걸릴테니, login()함수 끝날때까지 기다리라고 await걸어줌.
         return res.json(response); // client한테 제이슨 형태로 응답해줌.
     },
 

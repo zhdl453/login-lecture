@@ -1,4 +1,5 @@
 "use strict";
+const {reponse} = require("express");
 const UserStorage = require("./UserStorage");
 
 class User{
@@ -6,10 +7,10 @@ class User{
         this.body = body; //그러면 constructor(body)의 body가 => this.body의 (유저의 body)에 들어가는거임
     } 
 
-    login(){
+    async login(){
         const client = this.body;//UserStorage가 반환해주는게 없으니까 id,psword가 없는거임. 그래서 그냥 const{id,psword} 지워버려ㅇㅇ
-        UserStorage.getUserInfo(client.id); //getUsers(id,psword): id랑 psword라는 필드값을 가져오겠다는뜻
-         //id,psword만 받아왔음. 이름도 받고싶으면 {id, psword, name}이라고 하면됨.
+        console.log(await UserStorage.getUserInfo(client.id)); //getUsers(id,psword): id랑 psword라는 필드값을 가져오겠다는뜻 //id,psword만 받아왔음. 이름도 받고싶으면 {id, psword, name}이라고 하면됨.
+         //데이터를 다 읽어올때까지 기다리게 하는게 await인데 항상 promise를 반환하는 애한테만 쓸수 있는거 명심!
         //  if(id){
         //     if(id === client.id && psword === client.psword){
         //         return {success:true};//=> UserStorage에 있는 id,pw가 유저가 쓴 id,pw가 같다면
