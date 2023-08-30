@@ -6,7 +6,7 @@ class UserStorage {
   //users를 static으로 전역변수로 만들어주면 클래스 UserStorage가 접근가능함. home.ctrl.js파일에서
   //const userStorage = new UserStorage();
   //console.log(UserStorage.users); 이렇게 해줄 필요가 없어짐
-  static #getUserInfo(){
+  static #getUserInfo(data, id){
     const users = JSON.parse(data);
     const idx = users.id.indexOf(id); //파라미터로 담아준 id가 여기 담아지고, 그 id의 순차가 idx에 담아짐
     const usersKeys = Object.keys(users); //=> [id,psword,name] 이러한 배열이 만들어지고,
