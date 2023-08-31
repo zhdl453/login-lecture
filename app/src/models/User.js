@@ -8,16 +8,20 @@ class User{
     } 
 
     async login(){
-        const client = this.body;//UserStorage가 반환해주는게 없으니까 id,psword가 없는거임. 그래서 그냥 const{id,psword} 지워버려ㅇㅇ
-        const {id, psword} = await UserStorage.getUserInfo(client.id); //getUsers(id,psword): id랑 psword라는 필드값을 가져오겠다는뜻 //id,psword만 받아왔음. 이름도 받고싶으면 {id, psword, name}이라고 하면됨.
-         // 데이터를 다 읽어올때까지 기다리게 하는게 await인데 항상 promise를 반환하는 애한테만 쓸수 있는거 명심!
-        if(id){
-            if(id === client.id && psword === client.psword){
-                return {success:true};//=> UserStorage에 있는 id,pw가 유저가 쓴 id,pw가 같다면
-                }
-            return {success:false, msg:"비밀번호가 틀렸습니다."};
+        try{
+            const client = this.body;//UserStorage가 반환해주는게 없으니까 id,psword가 없는거임. 그래서 그냥 const{id,psword} 지워버려ㅇㅇ
+            const {id, psword} = await UserStorage.getUserInfo(client.id); //getUsers(id,psword): id랑 psword라는 필드값을 가져오겠다는뜻 //id,psword만 받아왔음. 이름도 받고싶으면 {id, psword, name}이라고 하면됨.
+            // 데이터를 다 읽어올때까지 기다리게 하는게 await인데 항상 promise를 반환하는 애한테만 쓸수 있는거 명심!
+            if(id){
+                if(id === client.id && psword === client.psword){
+                    return {success:true};//=> UserStorage에 있는 id,pw가 유저가 쓴 id,pw가 같다면
+                    }
+                return {success:false, msg:"비밀번호가 틀렸습니다."};
+            }
+            return {success:false, msg:"존재하지 않는 아이디입니다."};  
+        }catch(err){
+            return {success:false, msg:err};
         }
-        return {success:false, msg:"존재하지 않는 아이디입니다."};  
     }// 변수로 받을 수 있지만, 나는 오브젝트로 그냥 바로 id,psword변수에 받아버리기 위해서 const {id,psword}해줌
 
    async register(){

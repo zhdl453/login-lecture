@@ -2,6 +2,8 @@
 //modules
 const express = require("express");
 const bodyParser = require("body-parser");//body값을 잘 파싱해줄수 있도록 모듈을 설치해줘야함
+const dotenv = require("dotenv"); //환경변수 설정할때 쓰는 모듈
+dotenv.config();
 const app = express();
 
 //routing
