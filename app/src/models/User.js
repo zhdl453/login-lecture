@@ -25,11 +25,13 @@ class User{
     }// 변수로 받을 수 있지만, 나는 오브젝트로 그냥 바로 id,psword변수에 받아버리기 위해서 const {id,psword}해줌
 
    async register(){
-        const client = this.body;
-        const response = await UserStorage.save(client); //constructor(body)에서 받은 유저의 바디가 UserStorage에 저장되는거임
-        return response;
-    } catch(err){
-        return {success:false, msg:err};
+        try{
+            const client = this.body;
+            const response = await UserStorage.save(client); //constructor(body)에서 받은 유저의 바디가 UserStorage에 저장되는거임
+            return response;
+        } catch(err){
+            return {success:false, msg:err};
+        }
     }
 }
 module.exports = User; //밖에서 사용할수 있도록 export해줌
