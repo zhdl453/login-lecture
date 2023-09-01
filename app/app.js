@@ -3,17 +3,28 @@
 const express = require("express");
 const bodyParser = require("body-parser");//body값을 잘 파싱해줄수 있도록 모듈을 설치해줘야함
 const dotenv = require("dotenv"); //환경변수 설정할때 쓰는 모듈
-dotenv.config();
+const fs = require("fs");
+
+const morgan = require('morgan');
+
 const app = express();
+dotenv.config();
 
 //routing
 const home = require('./src/routes/home');
+const accessLogStream = fs.createWriteStream(
+    `${__dirname}/log/access.log`,
+    { flags:'a'}
+);
 //app setting
 app.set("views", "./src/views");
 app.set("view engine", "ejs");
 app.use(express.static(`${__dirname}/src/public`)); //정적경로로 이제 여기 /public를 기본으로 깔아주는거임
 app.use(bodyParser.json());//제이슨파일을 파싱할수 있도록 명시해줌 //미들웨어
 //URL을 통해 전달되는 데이터에 한글, 공백 등과 같은 문자가 포함될 경우 제대로 인식되지 않는 문제 해결
+app.use(//morgan을 통해서 출력 포맷을 정리해줄수 있음
+    morgan("dev"), {stream: accessLogStream} //데이터가 왔다갔다하는 연결통로가 stream
+);//morgan("dev")로그가 accessLogStream을 통해서 주고받게 되고, access.log에 로그가 저장됨.
 app.use(bodyParser.urlencoded({ extended: true}));
 //원래 app,get('/',(req,res)=>{} 이런식인데 router 폴더에다가 따로 파일 저장해서 불러올거니까
 //const router = express.Router(); 해주고
