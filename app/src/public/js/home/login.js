@@ -7,6 +7,8 @@ const id = document.querySelector("#id"), //#:태그에 id로 되어있는걸 �
 loginBtn.addEventListener("click", login);
 
 function login() {
+  if(!id.value) return alert("아이디를 입력해주세요.");
+  if(!psword.value) return alert("비밀번호가 일치하지 않습니다.");
   const req = {
     id: id.value,
     psword: psword.value,

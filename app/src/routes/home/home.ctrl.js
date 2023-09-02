@@ -2,20 +2,23 @@
 //hello,login라는 컨트롤러 함수를 만들고, 이를 외부에서 사용해준다
 //app.js 메인파일: 노드라는 서버에 모든 기본 설정을 여기를 함
 "use strict";
-
+const logger = require("../../config/logger");
 const User = require("../../models/User");
 const UserStorage = require("../../models/UserStorage");
 
 const output = {
     home: (req, res) => {
+        logger.info(`GET/login 200 "홈 화면으로 이동"`)
        res.render("home/index");
     },
     
     login: (req, res)=> {
+        logger.info(`GET/login 200 "login 화면으로 이동"`)
         res.render("home/login");
     },
 
     register:(req, res) =>{
+        logger.info(`GET/login 200 "register 화면으로 이동"`)
         res.render("home/register");
     }
 };
@@ -24,12 +27,23 @@ const process = {
     login:  async (req,res)=>{ //async는 항상 함수 앞에 놔줌.
         const user = new User(req.body); // User.js에서 유저의 body에 생성자 바디값 넣어줬으니, 이제 여기서 이 유저를 유저라는 인스턴스로 만들 수가 있게 됨.
         const response = await user.login(); // User.js에 있는 login()함수 실행도 오래걸릴테니, login()함수 끝날때까지 기다리라고 await걸어줌.
+        if(response.err)
+            logger.error(
+                `POST/login 200 Response: "success: ${response.success}, ${response.err}"`
+            );
+        else
+            logger.info(
+            `POST/login 200 Response: "success: ${response.success}, msg:${response.msg}"`
+            );
         return res.json(response); // client한테 제이슨 형태로 응답해줌.
     },
 
     register: async (req,res)=>{
         const user = new User(req.body); // User.js에서 유저의 body에 생성자 바디값 넣어줬으니, 이제 여기서 이 유저를 유저라는 인스턴스로 만들 수가 있게 됨.
         const response = await user.register();
+        logger.info(
+            `POST/register 200 Response: "success: ${response.success}, msg:${response.msg}"`
+        );
         return res.json(response); // client한테 제이슨 형태로 응답해줌.
     },
     //     const id = req.body.id,
