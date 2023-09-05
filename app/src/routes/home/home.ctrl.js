@@ -3,23 +3,24 @@
 //app.js 메인파일: 노드라는 서버에 모든 기본 설정을 여기를 함
 "use strict";
 // const { log } = require("async");
-const logger = require("../../config/logger");
+//const logger = require("../../config/logger");
 const User = require("../../models/User");
 const UserStorage = require("../../models/UserStorage");
 
 const output = {
   home: (req, res) => {
-    logger.info(`GET/login 200 "홈 화면으로 이동"`);
+    //logger.info(`GET/login 200 "홈 화면으로 이동"`);
     res.render("home/index");
+    
   },
 
   login: (req, res) => {
-    logger.info(`GET/login 200 "login 화면으로 이동"`);
+    //logger.info(`GET/login 200 "login 화면으로 이동"`);
     res.render("home/login");
   },
 
   register: (req, res) => {
-    logger.info(`GET/login 200 "register 화면으로 이동"`);
+    //logger.info(`GET/login 200 "register 화면으로 이동"`);
     res.render("home/register");
   },
 };
@@ -36,8 +37,8 @@ const process = {
         status: response.err ? 400 : 200
         //정상 응답할떈 200, 페이지가 이동했을때 응답하는건 300, 클라이언트에서 실수 했을 떄 서버간 응답해주는 400, 서버에서 실수했을때 응답해주는 500코드
     };
-
-    log(response, url);
+    
+    //log(response, url);
     return res.status(url.status).json(response); // client한테 제이슨 형태로 응답해줌.
   },
 
@@ -50,7 +51,7 @@ const process = {
         status: response.err ? 409 : 201
     };
 
-    log(response, url);
+    //log(response, url);
     return res.status(url.status).json(response); // client한테 제이슨 형태로 응답해줌.
   },//status(url.status): 클라이언트한테 상태코드 보여줄수 있음
   //     const id = req.body.id,
@@ -79,14 +80,14 @@ module.exports = {
 };
 //const user = new User(req.body);라는 클래스를 만들때 인스턴스로 만듦
 //이 클래스 형태가 req.body를 기본적으로 갖고 있도록 만들어줄거임. 왜? => 클라이언트 유저 특성을 갖도록 만들거기 때문
-const log = (response, url) => {
-  if (response.err) {
-    logger.error(
-      `${url.method} ${url.path} ${url.status} Response: ${response.success}, ${response.err}"`
-    );
-  } else {
-    logger.info(
-      `${url.method} ${url.path} ${url.status} Response: ${response.success}, ${response.msg || ""}"`
-    );
-  }
-};
+// const log = (response, url) => {
+//   if (response.err) {
+//     logger.error(
+//       `${url.method} ${url.path} ${url.status} Response: ${response.success}, ${response.err}"`
+//     );
+//   } else {
+//     logger.info(
+//       `${url.method} ${url.path} ${url.status} Response: ${response.success}, ${response.msg || ""}"`
+//     );
+//   }
+// };
