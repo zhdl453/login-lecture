@@ -3,7 +3,7 @@
 "use strict";
 const app = require('../app'); //'../': 상위 폴더로 올라가서 그 레벨단위안에있는 파일 골라준다는 뜻
 //const logger = require("../src/config/logger");
-const PORT = process.env.PORT || 3306;
+const PORT = process.env.PORT || 3300;
 
 app.listen(PORT, () => {
   console.log(`${PORT} server is running`);

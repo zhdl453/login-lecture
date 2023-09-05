@@ -79,6 +79,7 @@
     "supports-color": "^7.2.0",
     "toidentifier": "^1.0.1",
     "type-is": "^1.6.18",
+    "underscore": "^1.13.6",
     "unpipe": "^1.0.0",
     "utils-merge": "^1.0.1",
     "vary": "^1.1.2",
