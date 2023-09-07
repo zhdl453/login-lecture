@@ -12,6 +12,7 @@ class UserStorage {
       const query = "SELECT * FROM login WHERE id =?;";
       db.query(query,[id], (err, data)=>{ //두번째 파라미터로 콜백함수를 던질수있는데, 첫번째는 err, 두번째는 읽었던 data
         if(err) reject(`${err}`); // 실패시 reject를 리턴하고 //오브젝트 객체로 값이 들어오니까 값만 들어오게 백틱으로 감싸줌
+        console.log("1" + data[0]);
         resolve(data[0]); //성공시 resolve를 리턴한다. //이 데이터는 지금 배열로 감싸져 있다. 그래서 data[0]로해서 값만 들고와야함
       });
     });
